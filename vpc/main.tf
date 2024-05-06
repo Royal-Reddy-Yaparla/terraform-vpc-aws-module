@@ -64,3 +64,23 @@ resource "aws_subnet" "database_subnet" {
     }
   )
 }
+
+
+resource "aws_route_table" "public_route" {
+  vpc_id = aws_vpc.main.id
+
+  route {
+    cidr_block        = "0.0.0.0/0"
+    gateway_id = aws_internet_gateway.igt.id
+  }
+
+  tags = merge(
+    var.common_tags,
+    var.public_route_table_tags,
+    {
+        Name = "${var.project_name}-${var.environment}-public"
+    }
+  )
+}
+
+

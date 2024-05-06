@@ -33,6 +33,12 @@ variable "database_subnets_tags" {
   default = {}
 }
 
+variable "public_route_table_tags" {
+  type = map 
+  default = {}
+}
+
+
 variable "project_name" {
   type = string
 }
