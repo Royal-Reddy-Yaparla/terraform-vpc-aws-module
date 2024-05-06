@@ -10,5 +10,26 @@ resource "aws_vpc_peering_connection" "peering" {
         Name = "${var.project_name}"
     }
   )
-
 }
+
+resource "aws_route" "acceptor_route" {
+  count = var.is_vpc_peering_required && var.acceptor_vpc_id == "" ? 1 : 0
+  route_table_id            = data.aws_route_table.default.id
+  destination_cidr_block    = var.cidr_block
+  vpc_peering_connection_id = aws_vpc_peering_connection.peering[0].id
+}
+
+resource "aws_route" "public" {
+  count = var.is_vpc_peering_required && var.acceptor_vpc_id == "" ? 1 : 0
+  route_table_id            = aws_route_table.public_route.id
+  destination_cidr_block    = data.aws_vpc.default.cidr_block
+  vpc_peering_connection_id = aws_vpc_peering_connection.peering[0].id
+}
+
+resource "aws_route" "private" {
+  count = var.is_vpc_peering_required && var.acceptor_vpc_id == "" ? 1 : 0
+  route_table_id            = aws_route_table.private_route.id
+  destination_cidr_block    = data.aws_vpc.default.cidr_block
+  vpc_peering_connection_id = aws_vpc_peering_connection.peering[0].id
+}
+
