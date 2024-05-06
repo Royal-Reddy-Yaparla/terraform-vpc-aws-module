@@ -9,16 +9,9 @@ variable "common_tags" {
 variable "vpc_tags" {
   type = map 
   default = {
-    created_by = "Royal"
   }
 }
 
-variable "internet_gateway_tags" {
-  type = map 
-  default = {
-    created_by = "Royal"
-  }
-}
 
 variable "project_name" {
   type = string
@@ -36,4 +29,8 @@ variable "public_subnets_cidr" {
 
 variable "private_subnets_cidr" {
   default = ["10.0.11.0/24","10.0.12.0/24"]
+}
+
+variable "database_subnets_cidr" {
+  default = ["10.0.21.0/24","10.0.22.0/24"]
 }

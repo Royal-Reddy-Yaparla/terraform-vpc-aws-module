@@ -28,6 +28,11 @@ variable "private_subnets_tags" {
   default = {}
 }
 
+variable "database_subnets_tags" {
+  type = map 
+  default = {}
+}
+
 variable "project_name" {
   type = string
 }
@@ -48,6 +53,11 @@ variable "public_subnets_cidr" {
 }
 
 variable "private_subnets_cidr" {
+  type = list
+  default = []
+}
+
+variable "database_subnets_cidr" {
   type = list
   default = []
 }

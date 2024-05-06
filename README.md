@@ -1,7 +1,7 @@
 ###### Steps VPC Resource Creating
 1.  ~~Create VPC~~
 2.  ~~Create Internet gateway and attach to VPC~~
-3.  Create Subnets 
+3.  ~~Create Subnets ~~
 4.  Create Route tables
 5.  Create Routes
 6.  Associate route tables with subnets
