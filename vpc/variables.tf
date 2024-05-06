@@ -38,6 +38,16 @@ variable "public_route_table_tags" {
   default = {}
 }
 
+variable "private_route_table_tags" {
+  type = map 
+  default = {}
+}
+
+variable "nat_gateway_tags" {
+  type = map 
+  default = {}
+}
+
 
 variable "project_name" {
   type = string

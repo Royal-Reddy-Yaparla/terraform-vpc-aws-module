@@ -78,7 +78,7 @@ resource "aws_route_table" "public_route" {
     var.common_tags,
     var.public_route_table_tags,
     {
-        Name = "${var.project_name}-public"
+        Name = "${var.project_name}-${var.environment}-public"
     }
   )
 }
@@ -89,3 +89,48 @@ resource "aws_route_table_association" "public" {
   route_table_id = aws_route_table.public_route.id
 }
 
+resource "aws_eip" "eip" {
+  domain = "vpc"
+}
+
+resource "aws_nat_gateway" "main" {
+  allocation_id = aws_eip.eip.id
+  subnet_id     = aws_subnet.public_subnet[0].id
+
+  tags = merge(
+    var.common_tags,
+    var.nat_gateway_tags,
+    {
+        Name = "${var.project_name}-${var.environment}"
+    }
+  )
+  depends_on = [aws_internet_gateway.igt]
+}
+
+resource "aws_route_table" "private_route" {
+  vpc_id = aws_vpc.main.id
+
+  route {
+    cidr_block        = "0.0.0.0/0"
+    gateway_id = aws_nat_gateway.main.id
+  }
+
+  tags = merge(
+    var.common_tags,
+    var.private_route_table_tags,
+    {
+        Name = "${var.project_name}-${var.environment}-private"
+    }
+  )
+}
+
+resource "aws_route_table_association" "private" {
+  count = length(aws_subnet.private_subnet)
+  subnet_id      = aws_subnet.private_subnet[count.index].id
+  route_table_id = aws_route_table.private_route.id
+}
+resource "aws_route_table_association" "database" {
+  count = length(aws_subnet.database_subnet)
+  subnet_id      = aws_subnet.database_subnet[count.index].id
+  route_table_id = aws_route_table.private_route.id
+}
