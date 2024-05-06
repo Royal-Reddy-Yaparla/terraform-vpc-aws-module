@@ -18,6 +18,16 @@ variable "igt_tags" {
   default = {}
 }
 
+variable "public_subnets_tags" {
+  type = map 
+  default = {}
+}
+
+variable "private_subnets_tags" {
+  type = map 
+  default = {}
+}
+
 variable "project_name" {
   type = string
 }
@@ -30,4 +40,14 @@ variable "environment" {
 variable "enable_dns_hostnames" {
   type = bool
   default = "true"
+}
+
+variable "public_subnets_cidr" {
+  type = list
+  default = []
+}
+
+variable "private_subnets_cidr" {
+  type = list
+  default = []
 }

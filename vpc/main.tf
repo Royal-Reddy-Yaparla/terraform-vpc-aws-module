@@ -21,3 +21,31 @@ resource "aws_internet_gateway" "igt" {
     }
   )
 }
+
+resource "aws_subnet" "public_subnet" {
+  count = length(var.public_subnets_cidr)
+  vpc_id = aws_vpc.main.id
+  availability_zone = local.azs_list[count.index]
+  cidr_block = var.public_subnets_cidr[count.index]
+  tags = merge(
+    var.common_tags,
+    var.public_subnets_tags,
+    {
+        Name = "${var.project_name}-${var.environment}-public-${local.azs_list[count.index]}"
+    }
+  )
+}
+
+resource "aws_subnet" "private_subnet" {
+  count = length(var.private_subnets_cidr)
+  vpc_id = aws_vpc.main.id
+  availability_zone = local.azs_list[count.index]
+  cidr_block = var.private_subnets_cidr[count.index]
+  tags = merge(
+    var.common_tags,
+    var.private_subnets_tags,
+    {
+        Name = "${var.project_name}-${var.environment}-private-${local.azs_list[count.index]}"
+    }
+  )
+}
