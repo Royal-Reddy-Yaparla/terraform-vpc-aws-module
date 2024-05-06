@@ -3,20 +3,25 @@ variable "cidr_block" {
   default = "10.0.0.0/16"
 }
 
-variable "vpc_name" {
-  type = string
-  default = "robokart"
+variable "common_tags" {
+  type = map 
+  default = {}
 }
 
-variable "vpc_env" {
-  type = string
-  default = "dev"
+variable "vpc_tags" {
+  type = map 
+  default = {}
 }
+
 
 variable "project_name" {
   type = string
-  default = "robokart"
 }
+
+variable "environment" {
+  type = string
+}
+
 
 variable "enable_dns_hostnames" {
   type = bool

@@ -3,10 +3,10 @@ resource "aws_vpc" "main" {
   instance_tenancy = "default"
   enable_dns_hostnames = var.enable_dns_hostnames
 
-  tags = {
-    Name = "${var.vpc_name}-${var.vpc_env}"
-    Environment = var.vpc_env
-    Terraform = "True"
-    Project= var.project_name
-  }
+  tags = merge(
+    var.common_tags,var.vpc_tags,
+    {
+        Name = "${var.project_name}-${var.environment}"
+    }
+  )
 }
