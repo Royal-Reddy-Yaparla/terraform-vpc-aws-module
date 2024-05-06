@@ -13,6 +13,12 @@ variable "vpc_tags" {
   }
 }
 
+variable "internet_gateway_tags" {
+  type = map 
+  default = {
+    created_by = "Royal"
+  }
+}
 
 variable "project_name" {
   type = string

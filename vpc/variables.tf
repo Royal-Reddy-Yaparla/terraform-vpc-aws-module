@@ -13,6 +13,10 @@ variable "vpc_tags" {
   default = {}
 }
 
+variable "igt_tags" {
+  type = map 
+  default = {}
+}
 
 variable "project_name" {
   type = string
