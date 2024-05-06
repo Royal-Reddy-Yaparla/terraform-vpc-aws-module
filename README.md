@@ -8,5 +8,5 @@
 7.  ~~Create Elastic IP~~
 8.  ~~Create NAT gateway in one of public subnet~~
 9.  ~~Associate NAT gateway with private subnets~~
-10. Peering Connection
-11. Routes connect between required VPC route tables
+10. ~~Peering Connection~~
+11. ~~Routes connect between required VPC route tables~~
