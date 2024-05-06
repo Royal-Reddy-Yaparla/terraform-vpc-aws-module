@@ -36,7 +36,7 @@ variable "database_subnets_cidr" {
 }
 
 variable "is_vpc_peering_required" {
-  default = "true"
+  default = true
 }
 variable "acceptor_vpc_id" {
   default = ""
