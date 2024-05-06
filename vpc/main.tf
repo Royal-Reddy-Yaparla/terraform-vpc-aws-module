@@ -78,9 +78,14 @@ resource "aws_route_table" "public_route" {
     var.common_tags,
     var.public_route_table_tags,
     {
-        Name = "${var.project_name}-${var.environment}-public"
+        Name = "${var.project_name}-public"
     }
   )
 }
 
+resource "aws_route_table_association" "public" {
+  count = length(aws_subnet.public_subnet)
+  subnet_id      = aws_subnet.public_subnet[count.index].id
+  route_table_id = aws_route_table.public_route.id
+}
 
