@@ -5,10 +5,11 @@ terraform {
       version = "5.48.0"
     }
   }
-  backend "s3" {
+   backend "s3" {
     bucket = "robokart-tf-lock-state"
-    key    = "env"
+    key    = "dev"
     region = "us-east-1"
+    dynamodb_table = "robokart-tf-lock"
   }
 }
 

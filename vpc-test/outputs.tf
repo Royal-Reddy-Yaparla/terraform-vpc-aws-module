@@ -2,10 +2,10 @@ output "vpc_id" {
   value = module.main.vpc_id
 }
 
-output "internet_gateway_id" {
-  value = module.main.internet_gateway_id
+output "igt_id" {
+  value = module.main.igt_id
 }
 
-output "availability_zones" {
-  value = module.main.availability_zones
+output "public_route_table_id" {
+  value = module.main.public_route_table_id
 }

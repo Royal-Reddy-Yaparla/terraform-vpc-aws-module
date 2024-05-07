@@ -1,43 +1,44 @@
+variable "cidr_block" {
+  default = "10.0.0.0/16"
+}
+
 variable "common_tags" {
   default = {
     project_name = "robokart"
     environment = "dev"
-    terraform = "true"
+    terraform = true
   }
 }
 
 variable "vpc_tags" {
-  type = map 
-  default = {
-  }
+  default = {}
 }
-
-
+variable "igt_tags" {
+  default = {}
+}
 variable "project_name" {
-  type = string
   default = "robokart"
 }
-
 variable "environment" {
-  type = string
   default = "dev"
 }
 
-variable "public_subnets_cidr" {
+variable "cidr_public" {
   default = ["10.0.1.0/24","10.0.2.0/24"]
 }
 
-variable "private_subnets_cidr" {
+variable "cidr_private" {
   default = ["10.0.11.0/24","10.0.12.0/24"]
 }
 
-variable "database_subnets_cidr" {
+variable "cidr_database" {
   default = ["10.0.21.0/24","10.0.22.0/24"]
 }
 
-variable "is_vpc_peering_required" {
+variable "is_peering_required" {
   default = true
 }
-variable "acceptor_vpc_id" {
+
+variable "accepters_vpc_id" {
   default = ""
 }
