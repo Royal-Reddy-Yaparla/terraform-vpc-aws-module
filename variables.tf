@@ -3,6 +3,12 @@ variable "cidr_block" {
   type = string
 }
 
+variable "availability_zones" {
+  description = "Availability zones"
+  type        = list(string)
+  default     = ["us-east-1a", "us-east-1b", "us-east-1c","us-east-1d", "us-east-1e", "us-east-1f"]
+}
+
 variable "enable_dns_hostnames" {
   default = true
   type = bool
